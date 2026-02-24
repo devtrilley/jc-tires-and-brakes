@@ -1,0 +1,242 @@
+@import "tailwindcss";
+:root {
+  /* === JC's Tire & Brakes Theme === */
+
+  /* Brand / Headlines */
+  --jc-black: #171717;
+  --jc-tire-black: #171717;
+
+  /* Primary Reds */
+  --jc-red-700: #990201;
+  --jc-red-600: #c00302;
+  --jc-red-500: #ed0402;
+
+  /* Accent */
+  --jc-accent: #dc2626;
+  --jc-accent-shadow: rgba(220, 38, 38, 0.45);
+
+  /* Neutrals */
+  --jc-white: #ffffff;
+  --jc-stone: #f5f5f0;
+  --jc-gray-500: #6b7280;
+  --jc-gray-600: #4b5563;
+
+  /* Shadows */
+  --jc-shadow-black-10: rgba(0, 0, 0, 0.1);
+  --jc-shadow-black-18: rgba(0, 0, 0, 0.18);
+  --jc-shadow-black-25: rgba(0, 0, 0, 0.25);
+
+  /* === Legacy aliases (keeps old fl- references working during transition) === */
+  --fl-teal: var(--jc-black);
+  --fl-green-700: var(--jc-red-700);
+  --fl-green-600: var(--jc-red-600);
+  --fl-green-500: var(--jc-red-500);
+  --fl-lemon: var(--jc-accent);
+  --fl-lemon-shadow: var(--jc-accent-shadow);
+  --fl-white: var(--jc-white);
+  --fl-gray-500: var(--jc-gray-500);
+  --fl-gray-600: var(--jc-gray-600);
+  --fl-shadow-black-10: var(--jc-shadow-black-10);
+  --fl-shadow-black-18: var(--jc-shadow-black-18);
+  --fl-shadow-black-25: var(--jc-shadow-black-25);
+}
+
+/* Global safety guards */
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Better typography */
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h1,
+h2 {
+  color: inherit;
+}
+
+h1 {
+  font-weight: 800;
+}
+
+h2 {
+  font-weight: 700;
+}
+
+p {
+  line-height: 1.6;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Cursor pointer for all interactive elements */
+button,
+a,
+select {
+  cursor: pointer !important;
+}
+
+/* Footer navigation link styling */
+footer button:not([class*="bg-white"]):not([class*="bg-black"]):hover,
+footer a:not([class*="bg-white"]):not([class*="bg-black"]):hover {
+  text-decoration: underline;
+}
+
+/* Disabled button cursor (DO NOT globally dim opacity) */
+button:disabled {
+  cursor: not-allowed !important;
+}
+
+/* Form input hover states */
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: #9ca3af !important;
+}
+
+/* Enhanced focus states (use theme vars) */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--jc-red-600) !important;
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.25);
+}
+
+/* Multi-step form fade animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Better button transitions */
+button,
+a {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Smooth image loading */
+img {
+  image-rendering: -webkit-optimize-contrast;
+}
+
+@keyframes stats-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-stats-scroll {
+  animation: stats-scroll 20s linear infinite;
+}
+
+.carousel-track {
+  display: flex;
+  will-change: transform;
+  transition: transform 420ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 1;
+    max-height: 500px;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+/* === JC's Tire & Brakes Form Buttons === */
+.jc-form-btn-primary {
+  background: linear-gradient(135deg, var(--jc-black), var(--jc-red-600));
+  color: var(--jc-white);
+  font-weight: 800;
+  border-radius: 0.75rem;
+  box-shadow: 0 18px 40px var(--jc-shadow-black-18);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+/* DISABLED = NEUTRAL GREY */
+.jc-form-btn-primary:disabled {
+  background: #e5e7eb;
+  color: #9ca3af;
+  box-shadow: none;
+  filter: none;
+}
+.jc-form-btn-primary:hover:not(:disabled) {
+  box-shadow: 0 22px 52px var(--jc-shadow-black-25);
+  transform: translateY(-1px);
+}
+.jc-form-btn-primary:active:not(:disabled) {
+  transform: scale(0.98);
+}
+.jc-form-btn-primary:disabled {
+  filter: grayscale(0.15) brightness(0.92);
+  box-shadow: 0 10px 24px var(--jc-shadow-black-10);
+}
+.jc-form-btn-secondary {
+  background: var(--jc-white);
+  color: #000;
+  font-weight: 800;
+  border-radius: 0.75rem;
+  border: 2px solid rgba(220, 38, 38, 0.45);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+    transform 0.2s ease;
+}
+.jc-form-btn-secondary:hover:not(:disabled) {
+  background: rgba(220, 38, 38, 0.08);
+  border-color: rgba(220, 38, 38, 0.8);
+}
+.jc-form-btn-secondary:active:not(:disabled) {
+  transform: scale(0.98);
+}
