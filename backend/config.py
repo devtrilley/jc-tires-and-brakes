@@ -8,10 +8,12 @@ class Config:
     # Database - PostgreSQL in production, SQLite for local dev
     SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "sqlite:///doonga.db")
 
-    # Fix for Render PostgreSQL URLs (postgres:// → postgresql://)
-    if SQLALCHEMY_DATABASE_URI and SQLALCHEMY_DATABASE_URI.startswith("postgres://"):
+    # Fix for Render PostgreSQL URLs and psycopg3 dialect
+    if SQLALCHEMY_DATABASE_URI:
         SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace(
             "postgres://", "postgresql://", 1
+        ).replace(
+            "postgresql://", "postgresql+psycopg://", 1
         )
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
